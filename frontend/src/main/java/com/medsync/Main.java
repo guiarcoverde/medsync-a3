@@ -1,4 +1,4 @@
-package org.medsync;
+package com.medsync;
 
 public class Main {
     public static void main(String[] args) {
