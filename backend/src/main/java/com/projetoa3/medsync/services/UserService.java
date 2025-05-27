@@ -1,15 +1,15 @@
 package com.projetoa3.medsync.services;
 
 import com.projetoa3.medsync.domain.user.User;
+import com.projetoa3.medsync.dtos.LoginRequestDTO;
 import com.projetoa3.medsync.dtos.UpdateUserDTO;
 import com.projetoa3.medsync.exceptions.EmailAlreadyExistsException;
+import com.projetoa3.medsync.exceptions.InvalidCredentialsException;
 import com.projetoa3.medsync.repositories.UserRepository;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class UserService {
@@ -40,6 +40,16 @@ public class UserService {
             user.setContatoEmergenciaTelefone(dto.getContatoEmergenciaTelefone());
             return userRepository.save(user);
         });
+    }
+
+    public User authenticate(LoginRequestDTO loginRequest) {
+        User user = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new InvalidCredentialsException("Email ou senha inválidos"));
+
+        if (!passwordEncoder.matches(loginRequest.getSenha(), user.getSenhaHash())) {
+            throw new InvalidCredentialsException("Email ou senha inválidos");
+        }
+        return user;
     }
 
 
