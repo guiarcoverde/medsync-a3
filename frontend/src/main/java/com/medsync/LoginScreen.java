@@ -18,27 +18,41 @@ public class LoginScreen extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(new Color(230, 240, 255)); // Light blue background for a medical theme
 
         JLabel titleLabel = new JLabel("Medsync");
-        titleLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 24));
+        titleLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 24)); // Use JetBrains Mono font for the title
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center-align the title
+        titleLabel.setIcon(new ImageIcon("resources/medical-icon.png")); // Add a medical-themed icon
+        titleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        titleLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
+
         panel.add(titleLabel);
         panel.add(Box.createVerticalStrut(20)); // Add spacing below the title
 
         JLabel emailLabel = new JLabel("Email:");
+        emailLabel.setFont(new Font("Inter", Font.PLAIN, 16)); // Use Inter font for labels
         emailLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center-align the label
         JTextField emailField = new JTextField();
         emailField.setMaximumSize(new Dimension(Integer.MAX_VALUE, emailField.getPreferredSize().height));
+        emailField.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for text fields
 
-        JLabel passwordLabel = new JLabel("Password:");
+        JLabel passwordLabel = new JLabel("Senha:");
+        passwordLabel.setFont(new Font("Inter", Font.PLAIN, 16)); // Use Inter font for labels
         passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center-align the label
         JPasswordField passwordField = new JPasswordField();
         passwordField.setMaximumSize(new Dimension(Integer.MAX_VALUE, passwordField.getPreferredSize().height));
+        passwordField.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for text fields
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        buttonPanel.setOpaque(false); // Make button panel blend with the background
 
         JButton loginButton = new JButton("Login");
+        loginButton.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for buttons
+        loginButton.setBackground(new Color(0, 123, 255)); // Blue button for login
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setFocusPainted(false);
         loginButton.addActionListener((ActionEvent e) -> {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
@@ -73,6 +87,10 @@ public class LoginScreen extends JFrame {
         });
 
         JButton registerButton = new JButton("Register");
+        registerButton.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for buttons
+        registerButton.setBackground(new Color(40, 167, 69)); // Green button for register
+        registerButton.setForeground(Color.WHITE);
+        registerButton.setFocusPainted(false);
         registerButton.addActionListener((ActionEvent e) -> {
             new RegisterScreen().setVisible(true);
             this.dispose();
