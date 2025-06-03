@@ -27,15 +27,22 @@ public class ConsultaScreen extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(new Color(230, 240, 255)); // Light blue background for a medical theme
 
         JLabel titleLabel = new JLabel("Consultas");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 24)); // Use JetBrains Mono font for the title
+        titleLabel.setForeground(new Color(0, 123, 255)); // Blue text for the title
 
         String[] columnNames = {"ID", "Nome Médico", "Especialidade", "Data", "Hora", "Recorrente", "Observações"};
         tableModel = new DefaultTableModel(columnNames, 0);
         JTable consultasTable = new JTable(tableModel);
         consultasTable.setFillsViewportHeight(true);
+        consultasTable.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for table content
+        consultasTable.setRowHeight(25); // Increase row height for better readability
+        consultasTable.getTableHeader().setFont(new Font("Inter", Font.BOLD, 14)); // Bold header font
+        consultasTable.getTableHeader().setBackground(new Color(0, 123, 255)); // Blue header background
+        consultasTable.getTableHeader().setForeground(Color.WHITE); // White header text
 
         // Hide the ID column
         consultasTable.getColumnModel().getColumn(0).setMinWidth(0);
@@ -44,15 +51,24 @@ public class ConsultaScreen extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(consultasTable);
         scrollPane.setPreferredSize(new Dimension(750, 400));
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(0, 123, 255), 2)); // Add border to the table
 
         JButton newConsultaButton = new JButton("Nova Consulta");
         newConsultaButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        newConsultaButton.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for buttons
+        newConsultaButton.setBackground(new Color(40, 167, 69)); // Green button for new appointment
+        newConsultaButton.setForeground(Color.WHITE);
+        newConsultaButton.setFocusPainted(false);
         newConsultaButton.addActionListener((ActionEvent e) -> {
             new NovaConsultaScreen(token, this).setVisible(true);
         });
 
         JButton updateConsultaButton = new JButton("Atualizar Consulta");
         updateConsultaButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        updateConsultaButton.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for buttons
+        updateConsultaButton.setBackground(new Color(0, 123, 255)); // Blue button for updating appointment
+        updateConsultaButton.setForeground(Color.WHITE);
+        updateConsultaButton.setFocusPainted(false);
         updateConsultaButton.addActionListener((ActionEvent e) -> {
             int selectedRow = consultasTable.getSelectedRow();
             if (selectedRow == -1) {
@@ -68,6 +84,16 @@ public class ConsultaScreen extends JFrame {
             }
         });
 
+        JButton updatePersonalInfoButton = new JButton("Atualizar informações pessoais");
+        updatePersonalInfoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        updatePersonalInfoButton.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for buttons
+        updatePersonalInfoButton.setBackground(new Color(255, 193, 7)); // Yellow button for updating personal info
+        updatePersonalInfoButton.setForeground(Color.WHITE);
+        updatePersonalInfoButton.setFocusPainted(false);
+        updatePersonalInfoButton.addActionListener((ActionEvent e) -> {
+            new UpdatePersonalInfoScreen(token).setVisible(true);
+        });
+
         panel.add(titleLabel);
         panel.add(Box.createVerticalStrut(10));
         panel.add(scrollPane);
@@ -75,6 +101,8 @@ public class ConsultaScreen extends JFrame {
         panel.add(newConsultaButton);
         panel.add(Box.createVerticalStrut(10));
         panel.add(updateConsultaButton);
+        panel.add(Box.createVerticalStrut(10));
+        panel.add(updatePersonalInfoButton);
 
         add(panel);
 

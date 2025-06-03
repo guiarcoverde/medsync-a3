@@ -27,6 +27,14 @@ public class UpdateConsultaScreen extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(new Color(230, 240, 255)); // Light blue background for a medical theme
+
+        JLabel titleLabel = new JLabel("Atualizar Consulta");
+        titleLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 24)); // Use JetBrains Mono font for the title
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setForeground(new Color(0, 123, 255)); // Blue text for the title
+        panel.add(titleLabel);
+        panel.add(Box.createVerticalStrut(20)); // Add spacing below the title
 
         JLabel dataLabel = new JLabel("Data (dd/MM/yyyy):");
         JSpinner dataSpinner = new JSpinner(new SpinnerDateModel());
@@ -72,6 +80,19 @@ public class UpdateConsultaScreen extends JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao conectar ao servidor: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
+
+        dataLabel.setFont(new Font("Inter", Font.PLAIN, 16)); // Use Inter font for labels
+        dataLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center-align the label
+        horaLabel.setFont(new Font("Inter", Font.PLAIN, 16));
+        horaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        dataSpinner.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for spinner
+        horaSpinner.setFont(new Font("Inter", Font.PLAIN, 14));
+
+        updateButton.setFont(new Font("Inter", Font.PLAIN, 14)); // Use Inter font for buttons
+        updateButton.setBackground(new Color(40, 167, 69)); // Green button for updating consultation
+        updateButton.setForeground(Color.WHITE);
+        updateButton.setFocusPainted(false);
 
         panel.add(dataLabel);
         panel.add(dataSpinner);
