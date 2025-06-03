@@ -1,5 +1,6 @@
 package com.projetoa3.medsync.domain.consulta;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.projetoa3.medsync.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Consulta {
 
     @Id
