@@ -19,6 +19,12 @@ public class LoginScreen extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
+        JLabel titleLabel = new JLabel("Medsync");
+        titleLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center-align the title
+        panel.add(titleLabel);
+        panel.add(Box.createVerticalStrut(20)); // Add spacing below the title
+
         JLabel emailLabel = new JLabel("Email:");
         emailLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center-align the label
         JTextField emailField = new JTextField();
@@ -59,7 +65,7 @@ public class LoginScreen extends JFrame {
                         this.dispose();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao realizar login: " + conn.getResponseMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao conectar ao servidor: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
